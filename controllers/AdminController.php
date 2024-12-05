@@ -22,3 +22,16 @@
         header("Location: ../views/admin/login.php");
         exit();
     }
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET["view"])) {
+    $view = $_GET["view"];
+    if ($view === "dashboard") {
+        header ("Location: ../views/admin/dashboard.php");
+        exit();
+    }
+
+    if ($view === "index") {
+        header ("Location: ../views/admin/news/index.php");
+        exit();
+    }
+}
