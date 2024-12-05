@@ -1,8 +1,8 @@
 <?php
-$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
-$host = $_SERVER['HTTP_HOST'];
-$request_uri = $_SERVER['REQUEST_URI'];
-$base_url = $protocol . '://' . $host . "/tlunews";
+    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'];
+    $request_uri = $_SERVER['REQUEST_URI'];
+    $base_url = $protocol . '://' . $host . "/tlunews";
 ?>
 
 <header class="p-3 text-bg-dark">
@@ -17,7 +17,7 @@ $base_url = $protocol . '://' . $host . "/tlunews";
                 <li><a href="<?php echo $base_url; ?>/controllers/AdminController.php?view=index" class="nav-link px-2 text-white">News</a></li>
             </ul>
             <div class="text-end">
-                <a href="../../controllers/AdminController.php?action=logout">
+                <a href="<?php echo $base_url; ?>/controllers/AdminController.php?action=logout">
                     <button type="button" class="btn btn-outline-light me-2">Logout</button>
                 </a>
             </div>

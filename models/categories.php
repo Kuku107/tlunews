@@ -50,4 +50,25 @@ class Categories
         $stmt->execute();
         return $stmt->fetchColumn();
     }
+
+    public function getAllCategories() {
+        $query = "SELECT name FROM categories";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getIdByName($name) {
+        $query = "SELECT id FROM categories WHERE name = :name";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute(["name" => $name]);
+        return $stmt->fetchColumn();
+    }
+
+    public function getNameById($id) {
+        $query = "SELECT name FROM categories WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute(["id" => $id]);
+        return $stmt->fetchColumn();
+    }
 }

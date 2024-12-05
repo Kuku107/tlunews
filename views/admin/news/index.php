@@ -9,13 +9,23 @@
 </head>
 <body>
 <?php
-include "../header.php";
-require_once "../../../models/news.php";
-$news = new News();
-$newsList = $news->getAllNews();
+    include "../header.php";
+    require_once "../../../models/news.php";
+    $news = new News();
+    $newsList = $news->getAllNews();
+    session_start();
+    if (!isset($_SESSION['user_id']) || (isset($_SESSION["role"]) && $_SESSION['role'] != 1)) {
+        header ("Location: login.php");
+        exit();
+    }
+
+    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'];
+    $request_uri = $_SERVER['REQUEST_URI'];
+    $base_url = $protocol . '://' . $host . "/tlunews";
 ?>
 <div class="container">
-    <a href="../../../controllers/NewsController.php?action=create">
+    <a href="<?= $base_url?>/controllers/NewsController.php?action=create">
         <button class="mt-3 btn btn-primary btn-lg">Thêm bài viết</button>
     </a>
     <table class="mt-5 table table-success table-striped">
@@ -34,15 +44,15 @@ $newsList = $news->getAllNews();
             <tr>
                 <td><?= $news["title"]?></td>
                 <td><?= $news["content"]?></td>
-                <td><img class="img-fluid" style="height: 100px; width: auto" src="<?= $news["image"]?>" width="100"></td>
+                <td><img class="img-fluid" style="width: 100px; height: 100px" src="<?= $base_url . "/" . $news["image"]?>" ></td>
                 <td><?= $news["created_at"]?></td>
                 <td><?= $news["category_name"]?></td>
                 <td>
-                    <a href="../../../controllers/NewsController.php?action=edit&id=<?= $news["id"]?>" class="btn btn-warning btn-sm me-2 mb-2" title="Edit">
+                    <a href="<?= $base_url?>/controllers/NewsController.php?action=edit&id=<?= $news["id"]?>" class="btn btn-warning btn-sm" title="Edit">
                         <i class="bi bi-pencil-fill"></i>
                     </a>
 
-                    <a href="../../../controllers/NewsController.php?action=delete&id=<?= $news["id"]?>" class="btn btn-danger btn-sm" title="Delete" onclick="return confirm('Are you sure you want to delete this news?');">
+                    <a href="<?= $base_url?>/controllers/NewsController.php?action=delete&id=<?= $news["id"]?>" class="btn btn-danger btn-sm" title="Delete" onclick="return confirm('Are you sure you want to delete this news?');">
                         <i class="bi bi-trash-fill"></i>
                     </a>
                 </td>
