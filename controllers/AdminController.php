@@ -15,3 +15,9 @@
             $_SESSION['error_message'] = 'Wrong username or password';
         }
     }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET["action"]) && $_GET["action"] == "logout") {
+        session_destroy();
+        header("Location: ../views/admin/login.php");
+        exit();
+    }
