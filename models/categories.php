@@ -44,7 +44,7 @@ class Categories
         $this->name = $name;
     }
 
-    public function getAllCategories() {
+    public function getCountCategories() {
         $query = "SELECT COUNT(*) FROM categories";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

@@ -118,10 +118,17 @@
             $this->category_id = $category_id;
         }
 
-        public function getAllNews() {
+        public function getCountNews() {
             $query = "SELECT COUNT(*) FROM news";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt->fetchColumn();
+        }
+
+        public function getAllNews() {
+            $query = "SELECT a.*, c.name as category_name FROM news a JOIN categories c ON a.category_id = c.id";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }
