@@ -16,8 +16,16 @@
             $news = $news->getById($id);
             $categories = new Categories();
             $category_name = $categories->getNameById($news["category_id"]);
-            print_r($news);
-            print_r($category_name);
+            $categoriesList = $categories->getAllCategories();
+            require "../views/admin/news/edit.php";
+        }
+
+        if ($action === "delete") {
+            $id = $_GET["id"];
+            $news = new News();
+            $news -> deleteById($id);
+            header ("Location: ../views/admin/news/index.php");
+            exit();
         }
     }
 
@@ -31,7 +39,7 @@
         $category_name = $_POST["category"];
         $category_id = $categories->getIdByName($category_name);
         $created_at = date("Y-m-d H:i:s");
-        $anh = $_POST["anh"] ?? "";
+        $anh = $_POST["anh-notset"] ?? "";
         if (isset($_FILES["anh"]) && $_FILES["anh"]["error"] == 0) {
             $target_dir = __DIR__ . "\\..\\assets\\images\\";
             $target_file = $target_dir . basename($_FILES["anh"]["name"]);
@@ -42,6 +50,13 @@
 
         if ($action === "create") {
             $news->createNews();
+            header ("Location: ../views/admin/news/index.php");
+            exit();
+        }
+        if ($action === "edit") {
+            $originalNews = $news->getById($id);
+            $news->setCreatedAt($originalNews["created_at"]);
+            $news->updateNews();
             header ("Location: ../views/admin/news/index.php");
             exit();
         }

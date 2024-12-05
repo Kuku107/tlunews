@@ -150,8 +150,35 @@
         public function getById($id) {
             $query = "SELECT * FROM news WHERE id = :id";
             $stmt = $this->conn->prepare($query);
-            $stmt.bindParam(":id", $id);
+            $stmt->bindParam(":id", $id);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+        public function updateNews()
+        {
+            $query = "UPDATE news SET title = :title, content = :content, image = :image, 
+                    created_at = :created_at, category_id = :category_id WHERE id = :id";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(":id", $this->id);
+            $stmt->bindParam(":title", $this->title);
+            $stmt->bindParam(":content", $this->content);
+            $stmt->bindParam(":image", $this->image);
+            $stmt->bindParam(":category_id", $this->category_id);
+            $stmt->bindParam(":created_at", $this->created_at);
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        }
+
+        public function deleteById($id) {
+            $query = "DELETE FROM news WHERE id = :id";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(":id", $id);
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
         }
     }
