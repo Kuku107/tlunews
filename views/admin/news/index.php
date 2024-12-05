@@ -9,10 +9,15 @@
 </head>
 <body>
 <?php
-include "../header.php";
-require_once "../../../models/news.php";
-$news = new News();
-$newsList = $news->getAllNews();
+    include "../header.php";
+    require_once "../../../models/news.php";
+    $news = new News();
+    $newsList = $news->getAllNews();
+    session_start();
+    if (!isset($_SESSION['user_id']) || (isset($_SESSION["role"]) && $_SESSION['role'] != 1)) {
+        header ("Location: login.php");
+        exit();
+    }
 ?>
 <div class="container">
     <a href="../../../controllers/NewsController.php?action=create">
