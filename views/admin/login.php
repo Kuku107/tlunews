@@ -31,12 +31,12 @@
 
                                         <div data-mdb-input-init class="form-outline mb-4">
                                             <label class="form-label" for="form2Example17">Username</label>
-                                            <input name="username" type="text" id="form2Example17" class="form-control form-control-lg" />
+                                            <input name="username" type="text" id="form2Example17" class="form-control form-control-lg" required/>
                                         </div>
 
                                         <div data-mdb-input-init class="form-outline mb-4">
                                             <label class="form-label" for="form2Example27">Password</label>
-                                            <input name="password" type="password" id="form2Example27" class="form-control form-control-lg" />
+                                            <input name="password" type="password" id="form2Example27" class="form-control form-control-lg" required/>
                                         </div>
 
                                         <div class="pt-1 mb-4">
