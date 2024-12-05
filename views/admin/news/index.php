@@ -39,7 +39,7 @@
             <tr>
                 <td><?= $news["title"]?></td>
                 <td><?= $news["content"]?></td>
-                <td><img class="img-fluid" style="height: 100px; width: auto" src="<?= $news["image"]?>" width="100"></td>
+                <td><img class="img-fluid" style="width: 100px; height: 100px" src=../../../<?= $news["image"]?> ></td>
                 <td><?= $news["created_at"]?></td>
                 <td><?= $news["category_name"]?></td>
                 <td>

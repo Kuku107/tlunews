@@ -131,4 +131,19 @@
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        public function createNews() {
+            $query = "INSERT INTO news(title, content, image, created_at, category_id) 
+                            VALUES(:title, :content, :image, :created_at, :category_id)";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(":title", $this->title);
+            $stmt->bindParam(":content", $this->content);
+            $stmt->bindParam(":image", $this->image);
+            $stmt->bindParam(":category_id", $this->category_id);
+            $stmt->bindParam(":created_at", $this->created_at);
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        }
     }
