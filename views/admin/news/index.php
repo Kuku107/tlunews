@@ -18,6 +18,11 @@
         header ("Location: login.php");
         exit();
     }
+
+    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'];
+    $request_uri = $_SERVER['REQUEST_URI'];
+    $base_url = $protocol . '://' . $host . "/tlunews";
 ?>
 <div class="container">
     <a href="../../../controllers/NewsController.php?action=create">
@@ -39,7 +44,7 @@
             <tr>
                 <td><?= $news["title"]?></td>
                 <td><?= $news["content"]?></td>
-                <td><img class="img-fluid" style="width: 100px; height: 100px" src=../../../<?= $news["image"]?> ></td>
+                <td><img class="img-fluid" style="width: 100px; height: 100px" src=<?= $base_url . "/" . $news["image"]?> ></td>
                 <td><?= $news["created_at"]?></td>
                 <td><?= $news["category_name"]?></td>
                 <td>

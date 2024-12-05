@@ -5,8 +5,19 @@
     if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $action = $_GET["action"];
         if ($action === "create") {
-            header ("Location: ../views/admin/news/add.php");
-            exit();
+            $categories = new Categories();
+            $categoriesList = $categories->getAllCategories();
+            require "../views/admin/news/add.php";
+        }
+
+        if ($action === "edit") {
+            $id = $_GET["id"];
+            $news = new News();
+            $news = $news->getById($id);
+            $categories = new Categories();
+            $category_name = $categories->getNameById($news["category_id"]);
+            print_r($news);
+            print_r($category_name);
         }
     }
 

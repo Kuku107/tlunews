@@ -8,9 +8,6 @@
 </head>
 <body>
 <?php
-    require_once "../../../models/categories.php";
-    $categories = new Categories();
-    $categoriesList = $categories->getAllCategories();
 ?>
 
     <div class="container mt-5">

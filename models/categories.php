@@ -64,4 +64,11 @@ class Categories
         $stmt->execute(["name" => $name]);
         return $stmt->fetchColumn();
     }
+
+    public function getNameById($id) {
+        $query = "SELECT name FROM categories WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute(["id" => $id]);
+        return $stmt->fetchColumn();
+    }
 }
