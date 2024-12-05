@@ -1,5 +1,5 @@
 <?php
-    require_once "../models/User.php";
+    require_once "../models/user.php";
     session_start();
 
     $user = new User();
@@ -9,6 +9,7 @@
         $userData = $user->getByUsername($username);
         if ($userData && $password == $userData['password'])  {
             $_SESSION['user_id'] = $userData['id'];
+            $_SESSION["role"] = $userData['role'];
             header("Location: ../views/admin/dashboard.php");
             exit();
         } else {
