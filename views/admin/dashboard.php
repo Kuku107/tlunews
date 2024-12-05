@@ -29,7 +29,7 @@
             <div class="card text-bg-light shadow-sm rounded-3" style="height: 15rem;">
                 <div class="card-header text-center fs-4 fw-bold">SỐ TIN TỨC</div>
                 <div class="card-body d-flex align-items-center justify-content-center">
-                    <p class="fs-3 fw-bold text-dark"><?= $new->getAllNews() ?></p>
+                    <p class="fs-3 fw-bold text-dark"><?= $new->getCountNews() ?></p>
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
             <div class="card text-bg-light shadow-sm rounded-3" style="height: 15rem;">
                 <div class="card-header text-center fs-4 fw-bold">SỐ DANH MỤC</div>
                 <div class="card-body d-flex align-items-center justify-content-center">
-                    <p class="fs-3 fw-bold text-dark"><?= $categories->getAllCategories() ?></p>
+                    <p class="fs-3 fw-bold text-dark"><?= $categories->getCountCategories() ?></p>
                 </div>
             </div>
         </div>
